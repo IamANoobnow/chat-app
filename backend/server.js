@@ -30,13 +30,13 @@ const PORT=process.env.PORT || 5000;
 
 
 
-app.get("/",(req,res)=>{
-    res.send("hellosddssd world");
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
-
-app.listen(PORT,() =>
-    {
-    connectToMongoDB();
+server.listen(PORT, () => {
+	connectToMongoDB();
 	console.log(`Server Running on port ${PORT}`);
-    });
+});
